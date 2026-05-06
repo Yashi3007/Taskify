@@ -33,6 +33,7 @@ exports.signup = async (req, res, next) => {
     const newUser = await User.create(validatedData);
     createSendToken(newUser, 201, res);
   } catch (err) {
+    console.error('SIGNUP ERROR:', err);
     if (err instanceof z.ZodError) {
       return next(new AppError(err.errors[0].message, 400));
     }
